@@ -49,7 +49,7 @@ func perfTest(n int) {
 		go func(round int) {
 			defer wg.Done()
 
-			var rwg sync.WaitGroup
+			//var rwg sync.WaitGroup
 			rstart := time.Now()
 			fmt.Println("Round ", round, "start at:", rstart)
 			for i := 0; i < totalTargets; i++ {
@@ -58,24 +58,24 @@ func perfTest(n int) {
 				}
 
 				tl := lis.NewTarget(strconv.Itoa(low), types[i%len(types)])
-				rwg.Add(1)
-				go func() {
-					defer rwg.Done()
-					lis.Query(tl)
-				}()
+				//rwg.Add(1)
+				//go func() {
+				//	defer rwg.Done()
+				lis.Query(tl)
+				//}()
 
 				if high%10 == 0 {
 					high--
 				}
 
 				th := lis.NewTarget(strconv.Itoa(high), types[i%len(types)])
-				rwg.Add(1)
-				go func() {
-					defer rwg.Done()
-					lis.Query(th)
-				}()
+				//rwg.Add(1)
+				//go func() {
+				//	defer rwg.Done()
+				lis.Query(th)
+				//}()
 			}
-			rwg.Wait()
+			//rwg.Wait()
 			rend := time.Now()
 
 			fmt.Println("Round ", round, "end at:", rend, "time used:", rend.Sub(rstart))
