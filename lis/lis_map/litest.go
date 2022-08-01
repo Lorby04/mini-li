@@ -1,18 +1,17 @@
-package main
+package lis_map
 
 import (
 	"fmt"
+	. "mini-li/lis/target"
 	"strconv"
 	"sync"
 	"time"
-
-	lis "mini-li/lis"
 )
 
 var totalTargets = 2000000
 var types = []string{"From", "To", "PAI", "Location"}
 
-func generateTargets() {
+func GenerateTargets() {
 	digit := 1000000001
 
 	fmt.Println("Number of types:", len(types), "starting from:", digit)
@@ -22,21 +21,21 @@ func generateTargets() {
 			digit++
 		}
 		digit++
-		t := lis.NewTarget(
+		t := NewTarget(
 			strconv.Itoa(digit),
 			types[i%len(types)],
 		)
 
-		lis.AddTarget(t)
+		AddTarget(t)
 		if i%(totalTargets/200) == 0 {
 			fmt.Println(i, "entries added")
 		}
 	}
 
-	fmt.Println("End generation at:", digit, "total entries:", lis.SizeOfTargets())
+	fmt.Println("End generation at:", digit, "total entries:", SizeOfTargets())
 }
 
-func perfTest(n int) {
+func PerfTest(n int) {
 	low := 1000000001
 	high := 9999999999
 
@@ -57,22 +56,22 @@ func perfTest(n int) {
 					low++
 				}
 
-				tl := lis.NewTarget(strconv.Itoa(low), types[i%len(types)])
+				tl := NewTarget(strconv.Itoa(low), types[i%len(types)])
 				//rwg.Add(1)
 				//go func() {
 				//	defer rwg.Done()
-				lis.Query(tl)
+				Query(tl)
 				//}()
 
 				if high%10 == 0 {
 					high--
 				}
 
-				th := lis.NewTarget(strconv.Itoa(high), types[i%len(types)])
+				th := NewTarget(strconv.Itoa(high), types[i%len(types)])
 				//rwg.Add(1)
 				//go func() {
 				//	defer rwg.Done()
-				lis.Query(th)
+				Query(th)
 				//}()
 			}
 			//rwg.Wait()
@@ -83,5 +82,5 @@ func perfTest(n int) {
 	}
 	wg.Wait()
 	end := time.Now()
-	fmt.Println("Testing is end at: ", end, "time used:", end.Sub(start), "Statistics: ", lis.Statistics())
+	fmt.Println("Testing is end at: ", end, "time used:", end.Sub(start), "Statistics: ", Statistics())
 }

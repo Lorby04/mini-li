@@ -1,7 +1,8 @@
-package lis
+package lis_tree
 
 import (
 	"fmt"
+	. "mini-li/lis/target"
 	"sync"
 	"sync/atomic"
 
