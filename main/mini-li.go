@@ -28,7 +28,7 @@ func main() {
 		lm.PerfTest(n)
 	} else {
 		lt.GenerateTargets()
-		ls.PerfTest(n)
+		lt.PerfTest(n)
 	}
 
 	return
