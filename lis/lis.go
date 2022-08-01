@@ -4,15 +4,17 @@ import (
 	"fmt"
 	"sync"
 	"sync/atomic"
+
+	"github.com/emirpasic/gods/maps/treemap"
 )
 
 var lock = &sync.RWMutex{}
-var targets map[string]struct{}
+var targets *Map = nil //map[string]struct{}
 var queryAttempt uint64 = 0
 var inlistAttempt uint64 = 0
 
 func init() {
-	targets = make(map[string]struct{})
+	targets = treemap.NewWithStringComparator() //make(map[string]struct{})
 }
 
 func Statistics() string {
@@ -62,7 +64,7 @@ func AddTarget(target Target) error {
 	}()
 
 	//fmt.Println("Add:", target.String(), "before:", len(targets))
-	targets[target.String()] = struct{}{}
+	targets.Put(target.String(), struct{}{})
 	//fmt.Println("Added:", target.String(), "after:", len(targets))
 	wUnlock(lock, &locked)
 	return nil
@@ -79,7 +81,7 @@ func Query(target Target) (inlist bool) {
 		locked := false
 		rLock(lock, &locked)
 		defer rUnlock(lock, &locked)
-		_, ok := targets[key]
+		_, ok := targets.Get(key)
 		rUnlock(lock, &locked)
 		if ok {
 			atomic.AddUint64(&inlistAttempt, 1)
@@ -94,7 +96,7 @@ func Query(target Target) (inlist bool) {
 func SizeOfTargets() int {
 	locked := false
 	rLock(lock, &locked)
-	size := len(targets)
+	size := targets.Size() //len(targets)
 	rUnlock(lock, &locked)
 	return size
 }
