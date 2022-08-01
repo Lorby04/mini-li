@@ -61,7 +61,9 @@ func AddTarget(target Target) error {
 			&locked)
 	}()
 
+	//fmt.Println("Add:", target.String(), "before:", len(targets))
 	targets[target.String()] = struct{}{}
+	//fmt.Println("Added:", target.String(), "after:", len(targets))
 	wUnlock(lock, &locked)
 	return nil
 }

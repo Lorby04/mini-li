@@ -21,7 +21,7 @@ func generateTargets() {
 		if digit%10 == 0 {
 			digit++
 		}
-
+		digit++
 		t := lis.NewTarget(
 			strconv.Itoa(digit),
 			types[i%len(types)],
