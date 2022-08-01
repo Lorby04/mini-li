@@ -1,10 +1,10 @@
-package lis-map
+package lis_map
 
 import (
 	"fmt"
+	. "mini-li/lis/target"
 	"sync"
 	"sync/atomic"
-	. "mini-li/lis/target"
 )
 
 var lock = &sync.RWMutex{}

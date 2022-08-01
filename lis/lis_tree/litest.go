@@ -1,4 +1,4 @@
-package lis_map
+package lis_tree
 
 import (
 	"fmt"
