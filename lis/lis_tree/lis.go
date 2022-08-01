@@ -15,7 +15,7 @@ var queryAttempt uint64 = 0
 var inlistAttempt uint64 = 0
 
 func init() {
-	targets = treemap.NewWithStringComparator() //make(map[string]struct{})
+	targets = NewWithStringComparator() //make(map[string]struct{})
 }
 
 func Statistics() string {
