@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+
+	lm "mini-li/lis/lis_map"
+	lt "mini-li/lis/lis_tree"
 )
 
 const usage = "Usage: program-name testmap|testtree -n val[1:100]"
@@ -24,7 +27,7 @@ func main() {
 		lm.GenerateTargets()
 		lm.PerfTest(n)
 	} else {
-		ls.GenerateTargets()
+		lt.GenerateTargets()
 		ls.PerfTest(n)
 	}
 
