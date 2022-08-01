@@ -19,11 +19,8 @@ func (me *Target) String() string {
 	}
 	var str strings.Builder
 	str.Grow(256)
-	str.WriteString("[Target(Key:")
 	str.WriteString(me.key)
-	str.WriteString(",Type:")
 	str.WriteString(me.ty)
-	str.WriteString(")]")
 	return str.String()
 }
 

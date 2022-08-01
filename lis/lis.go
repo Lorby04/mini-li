@@ -1,17 +1,25 @@
 package lis
 
 import (
-	"strings"
+	"fmt"
 	"sync"
+	"sync/atomic"
 )
 
 var lock = &sync.RWMutex{}
-var targets map[Target]struct{}
+var targets map[string]struct{}
+var queryAttempt uint64 = 0
+var inlistAttempt uint64 = 0
 
 func init() {
-	targets = make(map[Target]struct{})
+	targets = make(map[string]struct{})
 }
 
+func Statistics() string {
+	return fmt.Sprintf("Query:%ld, Got:%ld, in %d",
+		atomic.LoadUint64(&queryAttempt),
+		atomic.LoadUint64(&inlistAttempt))
+}
 func wLock(lock *sync.RWMutex, locked *bool) {
 	if *locked {
 		return
@@ -45,16 +53,6 @@ func rUnlock(lock *sync.RWMutex, locked *bool) {
 }
 
 func AddTarget(target Target) error {
-	var key strings.Builder
-	var ty strings.Builder
-	key.WriteString(target.key)
-	ty.WriteString(target.ty)
-
-	t := Target{
-		key: key.String(),
-		ty:  ty.String(),
-	}
-
 	locked := false
 	wLock(lock, &locked)
 	defer func() {
@@ -62,7 +60,7 @@ func AddTarget(target Target) error {
 			&locked)
 	}()
 
-	targets[t] = struct{}{}
+	targets[target.String()] = struct{}{}
 	wUnlock(lock, &locked)
 	return nil
 }
@@ -73,16 +71,20 @@ func Query(target Target) (inlist bool) {
 		panic("query")
 	}
 
-	go func() {
+	atomic.AddUint64(&queryAttempt, 1)
+	go func(key string) {
 		locked := false
 		rLock(lock, &locked)
 		defer rUnlock(lock, &locked)
-		_, ok := targets[target]
+		_, ok := targets[key]
 		rUnlock(lock, &locked)
 		ch <- ok
-	}()
+	}(target.String())
 
 	inlist = <-ch
+	if inlist {
+		atomic.AddUint64(&inlistAttempt, 1)
+	}
 	return
 }
 
