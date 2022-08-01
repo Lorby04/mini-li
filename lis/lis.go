@@ -16,7 +16,7 @@ func init() {
 }
 
 func Statistics() string {
-	return fmt.Sprintf("Query:%ld, Got:%ld, in %d",
+	return fmt.Sprintf("Query:%d, Got:%d, in %d entries",
 		atomic.LoadUint64(&queryAttempt),
 		atomic.LoadUint64(&inlistAttempt),
 		SizeOfTargets())
@@ -81,13 +81,13 @@ func Query(target Target) (inlist bool) {
 		defer rUnlock(lock, &locked)
 		_, ok := targets[key]
 		rUnlock(lock, &locked)
+		if ok {
+			atomic.AddUint64(&inlistAttempt, 1)
+		}
 		ch <- ok
 	}(target.String())
 
 	inlist = <-ch
-	if inlist {
-		atomic.AddUint64(&inlistAttempt, 1)
-	}
 	return
 }
 
