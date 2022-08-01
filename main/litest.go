@@ -83,5 +83,5 @@ func perfTest(n int) {
 	}
 	wg.Wait()
 	end := time.Now()
-	fmt.Println("Testing is end at: ", end, "time used:", end.Sub(start))
+	fmt.Println("Testing is end at: ", end, "time used:", end.Sub(start), "Statistics: ", lis.Statistics())
 }
