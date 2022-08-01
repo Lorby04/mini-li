@@ -6,7 +6,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/emirpasic/gods/maps/treemap"
+	. "github.com/emirpasic/gods/maps/treemap"
 )
 
 var lock = &sync.RWMutex{}
