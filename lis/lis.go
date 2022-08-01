@@ -85,3 +85,11 @@ func Query(target Target) (inlist bool) {
 	inlist = <-ch
 	return
 }
+
+func SizeOfTargets() int {
+	locked := false
+	rLock(lock, &locked)
+	size := len(targets)
+	rUnlock(lock, &locked)
+	return size
+}

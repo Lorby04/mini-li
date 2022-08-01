@@ -33,7 +33,7 @@ func generateTargets() {
 		}
 	}
 
-	fmt.Println("End generation at:", digit)
+	fmt.Println("End generation at:", digit, "total entries:", lis.SizeOfTargets())
 }
 
 func perfTest(n int) {
