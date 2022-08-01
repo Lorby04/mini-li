@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	lis "../lis"
+	lis "mini-li/lis"
 )
 
 var totalTargets = 2000000
