@@ -21,8 +21,11 @@ func main() {
 		return
 	}
 	if args[0] == "testmap" {
-		GenerateTargets()
-		PerfTest(n)
+		lm.GenerateTargets()
+		lm.PerfTest(n)
+	} else {
+		ls.GenerateTargets()
+		ls.PerfTest(n)
 	}
 
 	return
