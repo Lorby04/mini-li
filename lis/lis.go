@@ -18,7 +18,8 @@ func init() {
 func Statistics() string {
 	return fmt.Sprintf("Query:%ld, Got:%ld, in %d",
 		atomic.LoadUint64(&queryAttempt),
-		atomic.LoadUint64(&inlistAttempt))
+		atomic.LoadUint64(&inlistAttempt),
+		SizeOfTargets())
 }
 func wLock(lock *sync.RWMutex, locked *bool) {
 	if *locked {
