@@ -21,12 +21,15 @@ type service struct {
 }
 
 var sch chan service
+var swg sync.WaitGroup
 
 func init() {
 	targets = make(map[string]struct{})
 	sch = make(chan service, queueSize)
 	for i := 0; i < serviceNum; i++ {
+		swg.Add(1)
 		go func() {
+			defer swg.Done()
 			var s service = service{nil, ""}
 			ok := true
 			for ok {
@@ -43,6 +46,7 @@ func init() {
 
 func Stop() {
 	close(sch)
+	swg.Wait()
 }
 
 func Statistics() string {
@@ -95,34 +99,32 @@ func AddTarget(target Target) error {
 	targets[target.String()] = struct{}{}
 	//fmt.Println("Added:", target.String(), "after:", len(targets))
 	wUnlock(lock, &locked)
+	rLock(lock, &locked)
+	defer rUnlock(lock, &locked)
+	_,ok := targets[target.String()]
+	assert.Equal(ok, true)
 	return nil
 }
 
-func Query(target Target) (inlist bool) {
-	ch := make(chan bool)
-	if ch == nil {
-		panic("query")
-	}
-
+func Query(target Target, done func(bool)) {
 	atomic.AddUint64(&queryAttempt, 1)
 	s := service{
 		doIt: func(key string) {
 			locked := false
+			ok := false
+			defer done(ok)
 			rLock(lock, &locked)
 			defer rUnlock(lock, &locked)
-			_, ok := targets[key]
+			_, ok = targets[key]
 			rUnlock(lock, &locked)
 			if ok {
 				atomic.AddUint64(&inlistAttempt, 1)
 			}
-			ch <- ok
 		},
 		argument: target.String(),
 	}
 
 	sch <- s
-
-	inlist = <-ch
 	return
 }
 
