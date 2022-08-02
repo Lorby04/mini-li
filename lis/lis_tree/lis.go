@@ -110,6 +110,21 @@ func AddTarget(target Target) error {
 	return nil
 }
 
+func traverse() {
+	allow := false
+	if !allow {
+		return
+	}
+	locked := false
+	rLock(lock, &locked)
+	defer rUnlock(lock, &locked)
+	it := targets.iterator()
+	it.Begin()
+	for more := it.Next(); more; more = it.Next() {
+		fmt.Println("\n\t", it.Key())
+	}
+}
+
 func Query(target Target, done func(bool)) {
 	atomic.AddUint64(&queryAttempt, 1)
 	s := service{
@@ -123,12 +138,15 @@ func Query(target Target, done func(bool)) {
 			rUnlock(lock, &locked)
 			if ok {
 				atomic.AddUint64(&inlistAttempt, 1)
+			} else {
+				traverse()
 			}
 		},
 		argument: target.String(),
 	}
 
-	sch <- s
+	//sch <- s
+	go s.doIt(s.argument)
 	return
 }
 
