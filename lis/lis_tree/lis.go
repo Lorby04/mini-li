@@ -110,18 +110,19 @@ func AddTarget(target Target) error {
 	return nil
 }
 
-func traverse() {
+func traverseAgainst(t string) {
 	allow := false
 	if !allow {
 		return
 	}
+	fmt.Println("Query:\"", t, "\"")
 	locked := false
 	rLock(lock, &locked)
 	defer rUnlock(lock, &locked)
 	it := targets.Iterator()
 	it.Begin()
 	for more := it.Next(); more; more = it.Next() {
-		fmt.Println("\n\t", it.Key())
+		fmt.Println("\t", it.Key())
 	}
 }
 
@@ -139,7 +140,7 @@ func Query(target Target, done func(bool)) {
 			if ok {
 				atomic.AddUint64(&inlistAttempt, 1)
 			} else {
-				traverse()
+				traverseAgainst(key)
 			}
 		},
 		argument: target.String(),
