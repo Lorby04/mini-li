@@ -101,8 +101,11 @@ func AddTarget(target Target) error {
 	wUnlock(lock, &locked)
 	rLock(lock, &locked)
 	defer rUnlock(lock, &locked)
-	_,ok := targets[target.String()]
-	assert.Equal(ok, true)
+	if _, found := targets[target.String()]; !found {
+		rUnlock(lock, &locked)
+		fmt.Println("Cannot find the key:\"", target.String(), "\" just inserted")
+		panic(nil)
+	}
 	return nil
 }
 
