@@ -56,7 +56,7 @@ func PerfTest(n int) {
 					low++
 				}
 
-				for ty := range types {
+				for _, ty := range types {
 					t := NewTarget(strconv.Itoa(low), ty)
 					//rwg.Add(1)
 					//go func() {
@@ -68,7 +68,7 @@ func PerfTest(n int) {
 					high--
 				}
 
-				for ty := range types {
+				for _, ty := range types {
 					t := NewTarget(strconv.Itoa(high), ty)
 					//rwg.Add(1)
 					//go func() {
