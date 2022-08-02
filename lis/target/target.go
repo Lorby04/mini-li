@@ -21,7 +21,7 @@ func (me *Target) String() string {
 	str.Grow(256)
 	str.WriteString(me.key)
 	str.WriteString(me.ty)
-	return str.String()
+	return strings.TrimSpace(str.String())
 }
 
 func (me *Target) Key() string {

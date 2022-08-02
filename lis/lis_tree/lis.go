@@ -115,14 +115,14 @@ func traverseAgainst(t string) {
 	if !allow {
 		return
 	}
-	fmt.Println("Query:\"", t, "\"")
+	fmt.Println("Query:\t\"", t, "\"")
 	locked := false
 	rLock(lock, &locked)
 	defer rUnlock(lock, &locked)
 	it := targets.Iterator()
 	it.Begin()
 	for more := it.Next(); more; more = it.Next() {
-		fmt.Println("\t", it.Key())
+		fmt.Println("Valid:\t", it.Key())
 	}
 }
 

@@ -20,7 +20,6 @@ func GenerateTargets() {
 		if digit%10 == 0 {
 			digit++
 		}
-		digit++
 		t := NewTarget(
 			strconv.Itoa(digit),
 			types[i%len(types)],
@@ -30,6 +29,7 @@ func GenerateTargets() {
 		if i%(totalTargets/200) == 0 {
 			fmt.Println(i, "entries added")
 		}
+		digit++
 	}
 
 	fmt.Println("End generation at:", digit, "total entries:", SizeOfTargets())
@@ -70,6 +70,8 @@ func PerfTest(n int) {
 					rwg.Add(1)
 					Query(t, func(bool) { rwg.Done() })
 				}
+				low++
+				high--
 			}
 			rwg.Wait()
 			rend := time.Now()
