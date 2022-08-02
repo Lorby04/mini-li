@@ -118,7 +118,7 @@ func traverse() {
 	locked := false
 	rLock(lock, &locked)
 	defer rUnlock(lock, &locked)
-	it := targets.iterator()
+	it := targets.Iterator()
 	it.Begin()
 	for more := it.Next(); more; more = it.Next() {
 		fmt.Println("\n\t", it.Key())
