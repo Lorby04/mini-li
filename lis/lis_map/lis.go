@@ -12,8 +12,37 @@ var targets map[string]struct{}
 var queryAttempt uint64 = 0
 var inlistAttempt uint64 = 0
 
+var queueSize = 1000 //
+var serviceNum = 100
+
+type service struct {
+	doIt     func(string)
+	argument string
+}
+
+var sch chan service
+
 func init() {
 	targets = make(map[string]struct{})
+	sch = make(chan service, queueSize)
+	for i := 0; i < serviceNum; i++ {
+		go func() {
+			var s service = service{nil, ""}
+			ok := true
+			for ok {
+				s, ok = <-sch
+				if !ok {
+					return
+				}
+
+				s.doIt(s.argument)
+			}
+		}()
+	}
+}
+
+func Stop() {
+	close(sch)
 }
 
 func Statistics() string {
@@ -76,17 +105,22 @@ func Query(target Target) (inlist bool) {
 	}
 
 	atomic.AddUint64(&queryAttempt, 1)
-	go func(key string) {
-		locked := false
-		rLock(lock, &locked)
-		defer rUnlock(lock, &locked)
-		_, ok := targets[key]
-		rUnlock(lock, &locked)
-		if ok {
-			atomic.AddUint64(&inlistAttempt, 1)
-		}
-		ch <- ok
-	}(target.String())
+	s := service{
+		doIt: func(key string) {
+			locked := false
+			rLock(lock, &locked)
+			defer rUnlock(lock, &locked)
+			_, ok := targets[key]
+			rUnlock(lock, &locked)
+			if ok {
+				atomic.AddUint64(&inlistAttempt, 1)
+			}
+			ch <- ok
+		},
+		argument: target.String(),
+	}
+
+	sch <- s
 
 	inlist = <-ch
 	return

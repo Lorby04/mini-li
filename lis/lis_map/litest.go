@@ -56,23 +56,27 @@ func PerfTest(n int) {
 					low++
 				}
 
-				tl := NewTarget(strconv.Itoa(low), types[i%len(types)])
-				//rwg.Add(1)
-				//go func() {
-				//	defer rwg.Done()
-				Query(tl)
-				//}()
+				for ty := range types {
+					t := NewTarget(strconv.Itoa(low), ty)
+					//rwg.Add(1)
+					//go func() {
+					//	defer rwg.Done()
+					Query(t)
+					//}()
+				}
 
 				if high%10 == 0 {
 					high--
 				}
 
-				th := NewTarget(strconv.Itoa(high), types[i%len(types)])
-				//rwg.Add(1)
-				//go func() {
-				//	defer rwg.Done()
-				Query(th)
-				//}()
+				for ty := range types {
+					t := NewTarget(strconv.Itoa(high), ty)
+					//rwg.Add(1)
+					//go func() {
+					//	defer rwg.Done()
+					Query(t)
+					//}()
+				}
 			}
 			//rwg.Wait()
 			rend := time.Now()
