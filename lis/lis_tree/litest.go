@@ -14,7 +14,7 @@ var types = []string{"From", "To", "PAI", "Location"}
 func GenerateTargets() {
 	digit := 1000000001
 
-	// Gramine takes much more time on the first entry, discard it from performance calculation
+	// Gramine takes much more time on the first entry, exclude it from performance calculation
 	t := NewTarget(
 		strconv.Itoa(digit),
 		types[0],
