@@ -27,9 +27,9 @@ func GenerateTargets() {
 		)
 
 		AddTarget(t)
-		if i%(totalTargets/200) == 0 {
-			fmt.Println(i, "entries added")
-		}
+		//if i%(totalTargets/200) == 0 {
+		//	fmt.Println(i, "entries added")
+		//}
 		digit++
 	}
 
