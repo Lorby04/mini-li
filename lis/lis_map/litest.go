@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-var totalTargets = 2000000
+var totalTargets = 20000000
 var types = []string{"From", "To", "PAI", "Location"}
 
 func GenerateTargets() {
@@ -22,7 +22,7 @@ func GenerateTargets() {
 	digit++
 
 	start := time.Now()
-	fmt.Println("Number of types:", len(types), "starting from:", digit)
+	fmt.Println("Number of types:", len(types), "starting from:", digit, " at ", start)
 
 	for i := 0; i < totalTargets; i++ {
 		if digit%10 == 0 {
@@ -40,7 +40,7 @@ func GenerateTargets() {
 		//}
 	}
 
-	fmt.Println("End generation at:", digit, "total entries:", SizeOfTargets(), "in ", time.Now().Sub(start))
+	fmt.Println("End generation at:", digit, "total entries:", SizeOfTargets(), "in ", time.Since(start), " at ", time.Now())
 }
 
 func PerfTest(n int) {
