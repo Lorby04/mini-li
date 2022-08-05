@@ -13,11 +13,20 @@ var types = []string{"From", "To", "PAI", "Location"}
 
 func GenerateTargets() {
 	digit := 1000000001
+
+	// Gramine takes much more time on the first entry, discard it from performance calculation
+	t := NewTarget(
+		strconv.Itoa(digit),
+		types[0],
+	)
+	AddTarget(t)
+	digit++
+
 	start := time.Now()
 
 	fmt.Println("Number of types:", len(types), "starting from:", digit)
 
-	for i := 0; i < totalTargets; i++ {
+	for i := 1; i < totalTargets; i++ {
 		if digit%10 == 0 {
 			digit++
 		}
