@@ -14,6 +14,7 @@ var types = []string{"From", "To", "PAI", "Location"}
 func GenerateTargets() {
 	digit := 1000000001
 
+	start := time.Now()
 	fmt.Println("Number of types:", len(types), "starting from:", digit)
 
 	for i := 0; i < totalTargets; i++ {
@@ -32,7 +33,7 @@ func GenerateTargets() {
 		}
 	}
 
-	fmt.Println("End generation at:", digit, "total entries:", SizeOfTargets())
+	fmt.Println("End generation at:", digit, "total entries:", SizeOfTargets(), "in ", time.Now().Sub(start))
 }
 
 func PerfTest(n int) {
