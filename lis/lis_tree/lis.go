@@ -102,13 +102,13 @@ func AddTarget(target Target) error {
 	targets.Put(target.String(), struct{}{})
 	//fmt.Println("Added:", target.String(), "after:", len(targets))
 	wUnlock(lock, &locked)
-	rLock(lock, &locked)
-	defer rUnlock(lock, &locked)
-	if _, found := targets.Get(target.String()); !found {
-		rUnlock(lock, &locked)
-		fmt.Println("Cannot find the key:\"", target.String(), "\" just inserted")
-		panic(nil)
-	}
+	//rLock(lock, &locked)
+	//defer rUnlock(lock, &locked)
+	//if _, found := targets.Get(target.String()); !found {
+	//	rUnlock(lock, &locked)
+	//	fmt.Println("Cannot find the key:\"", target.String(), "\" just inserted")
+	//	panic(nil)
+	//}
 	return nil
 }
 
