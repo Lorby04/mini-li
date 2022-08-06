@@ -9,11 +9,11 @@ import (
 	lt "mini-li/lis/lis_tree"
 )
 
-const usage = "Usage: program-name testmap|testtree -n val[1:100]"
+const usage = "Usage: program-name testmap|testtree -n val[1:100] -t [1:1000]M|K"
 
 func main() {
 	args := os.Args[1:]
-	if len(args) != 3 || args[1] != "-n" {
+	if len(args) != 5 || args[1] != "-n" || args[3] != "-t" {
 		fmt.Println(usage)
 		return
 	}
@@ -23,11 +23,26 @@ func main() {
 		fmt.Println(usage)
 		return
 	}
+
+	mk := func() int {
+		if args[4][len(args[4])-1] == 'M' {
+			return 1000000
+		} else if args[4][len(args[4])-1] == 'K' {
+			return 1000
+		} else {
+			return 1
+		}
+	}()
+	t, _ := strconv.Atoi(args[4][:len(args[4])])
+	if t < 1 || t > 1000 {
+		t = 10
+	}
+
 	if args[0] == "testmap" {
-		lm.GenerateTargets()
+		lm.GenerateTargets(t * mk)
 		lm.PerfTest(n)
 	} else {
-		lt.GenerateTargets()
+		lt.GenerateTargets(t * mk)
 		lt.PerfTest(n)
 	}
 

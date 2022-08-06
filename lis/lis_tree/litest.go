@@ -8,10 +8,13 @@ import (
 	"time"
 )
 
-var totalTargets = 20000000
+var totalTargets = 10000000
 var types = []string{"From", "To", "PAI", "Location"}
 
-func GenerateTargets() {
+func GenerateTargets(n int) {
+	if n >= 1000 {
+		totalTargets = n
+	}
 	digit := 1000000001
 
 	// Gramine takes much more time on the first entry, exclude it from performance calculation
