@@ -33,7 +33,7 @@ func main() {
 			return 1
 		}
 	}()
-	t, _ := strconv.Atoi(args[4][:len(args[4])])
+	t, _ := strconv.Atoi(args[4][:len(args[4])-1])
 	if t < 1 || t > 1000 {
 		t = 10
 	}
