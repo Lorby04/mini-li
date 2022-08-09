@@ -34,7 +34,7 @@ func main() {
 		}
 	}()
 	t, _ := strconv.Atoi(args[4][:len(args[4])-1])
-	if t < 1 || t > 1000 {
+	if t < 1 || t > 100000 {
 		t = 10
 	}
 
