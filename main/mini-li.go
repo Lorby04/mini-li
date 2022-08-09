@@ -9,7 +9,7 @@ import (
 	lt "mini-li/lis/lis_tree"
 )
 
-const usage = "Usage: program-name testmap|testtree -n val[1:100] -t [1:1000]M|K"
+const usage = "Usage: program-name testmap|testtree -n val[1:100] -t [1:1000]M|m|K|k"
 
 func main() {
 	args := os.Args[1:]
@@ -25,9 +25,9 @@ func main() {
 	}
 
 	mk := func() int {
-		if args[4][len(args[4])-1] == 'M' {
+		if args[4][len(args[4])-1] == 'M' || args[4][len(args[4])-1] == 'm' {
 			return 1000000
-		} else if args[4][len(args[4])-1] == 'K' {
+		} else if args[4][len(args[4])-1] == 'K' || args[4][len(args[4])-1] == 'k' {
 			return 1000
 		} else {
 			return 1
