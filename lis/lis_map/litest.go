@@ -56,7 +56,8 @@ func PerfTest(n int) {
 	var wg sync.WaitGroup
 	for round := 0; round < n; round++ {
 		wg.Add(1)
-		go func(round int) {
+		//go
+		func(round int) {
 			defer wg.Done()
 
 			var rwg sync.WaitGroup
