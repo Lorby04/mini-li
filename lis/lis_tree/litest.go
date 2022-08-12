@@ -27,7 +27,7 @@ func GenerateTargets(n int) {
 
 	start := time.Now()
 
-	fmt.Println("Number of types:", len(types), "starting from:", digit, " at ", start)
+	//fmt.Println("Number of types:", len(types), "starting from:", digit, " at ", start)
 
 	for i := 1; i < totalTargets; i++ {
 		if digit%10 == 0 {
@@ -53,7 +53,7 @@ func PerfTest(n, r int) {
 	high := 9999999999
 	rl := r
 	start := time.Now()
-	fmt.Println("Start testing at:", start)
+	//fmt.Println("Start testing at:", start)
 
 	var wg sync.WaitGroup
 	for round := 0; round < n; round++ {

@@ -25,7 +25,7 @@ func GenerateTargets(n int) {
 	digit++
 
 	start := time.Now()
-	fmt.Println("Number of types:", len(types), "starting from:", digit, " at ", start)
+	//fmt.Println("Number of types:", len(types), "starting from:", digit, " at ", start)
 
 	for i := 0; i < totalTargets; i++ {
 		if digit%10 == 0 {
