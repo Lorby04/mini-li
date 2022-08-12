@@ -25,7 +25,14 @@ var swg sync.WaitGroup
 
 func init() {
 	targets = make(map[string]struct{})
-	serviceNum = 1 //runtime.NumCPU() * 4
+}
+
+func Start(sn int) {
+	serviceNum = sn //runtime.NumCPU() * 4
+	if sn == 0 || sn == -1 {
+		sch = make(chan service)
+		return
+	}
 	queueSize = serviceNum * 10
 
 	sch = make(chan service, queueSize)
@@ -146,9 +153,13 @@ func Query(target Target, done func(bool)) {
 		argument: target.String(),
 	}
 
-	//sch <- s
-	//go
-	s.doIt(s.argument)
+	if serviceNum == 0 {
+		s.doIt(s.argument)
+	} else if serviceNum == -1 {
+		go s.doIt(s.argument)
+	} else {
+		sch <- s
+	}
 	return
 }
 

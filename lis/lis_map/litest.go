@@ -43,21 +43,19 @@ func GenerateTargets(n int) {
 		//}
 	}
 
-	fmt.Println("End generation at:", digit, "total entries:", SizeOfTargets(), "in ", time.Since(start), " at ", time.Now())
+	fmt.Println("Writing entries:", SizeOfTargets(), ", time: ", time.Since(start))
 }
 
-func PerfTest(n int) {
+func PerfTest(n, r int) {
 	low := 1000000001
 	high := 9999999999
-
+	rl := r
 	start := time.Now()
-	fmt.Println("Start testing at:", start)
+	//	fmt.Println("Start testing at:", start)
 
 	var wg sync.WaitGroup
 	for round := 0; round < n; round++ {
-		wg.Add(1)
-		//go
-		func(round int) {
+		f := func(round int) {
 			defer wg.Done()
 
 			var rwg sync.WaitGroup
@@ -87,11 +85,32 @@ func PerfTest(n int) {
 			rwg.Wait()
 			rend := time.Now()
 
-			fmt.Println("Round ", round, "end at:", rend, "time used:", rend.Sub(rstart))
-		}(round)
+			//			fmt.Println("Round ", round, "end at:", rend, "time used:", rend.Sub(rstart))
+		}
+
+		if r <= 1 {
+			wg.Add(1)
+			f(round)
+		} else {
+			var gwg sync.WaitGroup
+			for ; round < n && round < rl; round++ {
+				gwg.Add(1)
+				go func() {
+					defer gwg.Done()
+					wg.Add(1)
+					f(round)
+				}()
+			}
+			gwg.Wait()
+
+			if round < n {
+				round--
+				rl += r
+			}
+		}
 	}
 	wg.Wait()
 	end := time.Now()
-	fmt.Println("Testing is end at: ", end, "time used:", end.Sub(start), "Statistics: ", Statistics())
+	fmt.Println("Searching time:", end.Sub(start), "Statistics: ", Statistics())
 	Stop()
 }
