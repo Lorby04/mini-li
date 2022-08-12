@@ -86,7 +86,7 @@ func PerfTest(n, r int) {
 				high--
 			}
 			rwg.Wait()
-			rend := time.Now()
+			//rend := time.Now()
 
 			//fmt.Println("Round ", round, "end at:", rend, "time used:", rend.Sub(rstart))
 		}
