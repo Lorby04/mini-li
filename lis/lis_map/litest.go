@@ -59,8 +59,8 @@ func PerfTest(n, r int) {
 			defer wg.Done()
 
 			var rwg sync.WaitGroup
-			rstart := time.Now()
-			fmt.Println("Round ", round, "start at:", rstart)
+			//rstart := time.Now()
+			//fmt.Println("Round ", round, "start at:", rstart)
 			for i := 0; i < totalTargets; i++ {
 				if low%10 == 0 {
 					low++
