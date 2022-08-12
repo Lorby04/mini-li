@@ -30,16 +30,17 @@ func main() {
 		return
 	}
 
+	ti := args[tp]
 	mk := func() int {
-		if args[tp][len(args[tp])-1] == 'M' || args[tp][len(args[tp])-1] == 'm' {
+		if ti[len(ti)-1] == 'M' || ti[len(ti)-1] == 'm' {
 			return 1000000
-		} else if args[tp][len(args[tp])-1] == 'K' || args[4][len(args[tp])-1] == 'k' {
+		} else if ti[len(ti)-1] == 'K' || ti[len(ti)-1] == 'k' {
 			return 1000
 		} else {
 			return 1
 		}
 	}()
-	t, _ := strconv.Atoi(args[tp][:len(args[tp])-1])
+	t, _ := strconv.Atoi(ti[:len(ti)-1])
 	if t < 1 || t > 100000 {
 		t = 10
 	}
