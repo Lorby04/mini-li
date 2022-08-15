@@ -1,20 +1,3 @@
- 718874 root      20   0   32.1g  80612   9280 R  82.4   0.0   0:00.14 ego-host
- 718874 root      20   0   32.1g   7.1g   7.0g R 100.0   1.4   0:05.33 ego-host
- 718874 root      20   0   32.1g  14.2g  14.1g R 100.0   2.8   0:10.52 ego-host
- 718874 root      20   0   32.1g  21.2g  21.2g R 100.0   4.3   0:15.71 ego-host
- 718874 root      20   0   32.1g  28.3g  28.3g R 100.0   5.7   0:20.90 ego-host
- 718874 root      20   0   33.2g  31.4g  31.4g S 312.5   6.3   0:31.14 ego-host
- 718874 root      20   0   33.3g  31.4g  31.4g S 312.5   6.3   0:47.24 ego-host
- 718874 root      20   0   33.3g  31.4g  31.4g S 300.0   6.3   1:03.29 ego-host
- 718874 root      20   0   33.3g  31.4g  31.4g S 318.8   6.3   1:19.32 ego-host
- 718874 root      20   0   33.3g  31.4g  31.4g S 312.5   6.3   1:35.32 ego-host
- 718874 root      20   0   33.3g  31.4g  31.4g S 306.2   6.3   1:51.34 ego-host
- 718874 root      20   0   33.3g  31.4g  31.4g S 318.8   6.3   2:07.33 ego-host
- 718874 root      20   0   33.3g  31.4g  31.4g S 282.4   6.3   2:23.18 ego-host
- 718874 root      20   0   33.3g  31.4g  31.4g S 312.5   6.3   2:39.20 ego-host
- 718874 root      20   0   33.3g  31.4g  31.4g S 325.0   6.3   2:55.15 ego-host
- 718874 root      20   0   33.3g  31.4g  31.4g S 312.5   6.3   3:11.09 ego-host
- 718874 root      20   0       0      0      0 R 100.0   0.0   3:25.67 ego-host
 PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
  718874 root      20   0   32.1g  80612   9280 R  82.4   0.0   0:00.14 ego-host
  718874 root      20   0   32.1g   7.1g   7.0g R 100.0   1.4   0:05.33 ego-host
