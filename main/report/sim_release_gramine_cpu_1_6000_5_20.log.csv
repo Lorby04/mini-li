@@ -1,5 +1,4 @@
 PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
-PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
  778229 root      20   0 2832196  18956   3256 R  1088   0.0   0:01.74 exe
  778229 root      20   0 3558280  24568   3256 S  1344   0.0   1:08.20 exe
  778229 root      20   0 3821664  27872   3256 S  1347   0.0   2:17.49 exe
