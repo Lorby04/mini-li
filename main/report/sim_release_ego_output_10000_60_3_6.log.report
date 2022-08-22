@@ -3,5 +3,5 @@
 [erthost] entering enclave ...
 [ego] starting application ...
 Testing started with parameters:entries: 10000000 query loops: 60 input query routines: 3 service routines: 6 storage: testtree
-Writing entries: 10000000 , time:  9.499944664s
-Searching time: 1h3m37.516377345s Statistics:  Query:4800000000, Got:10014469, in 10000000 entries
+Writing entries: 10000000 , time:  9.423939763s
+Searching time: 1h0m54.525047339s Statistics:  Query:4800000000, Got:10012355, in 10000000 entries
