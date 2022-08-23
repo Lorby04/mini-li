@@ -4,3 +4,4 @@
 [ego] starting application ...
 Testing started with parameters:entries: 10000000 query loops: 60 input query routines: 5 service routines: 15 storage: testtree
 Writing entries: 10000000 , time:  9.503944658s
+Searching time: 1h39m33.213395902s Statistics:  Query:4800000000, Got:10045725, in 10000000 entries
