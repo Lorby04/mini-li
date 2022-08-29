@@ -5,7 +5,7 @@ gccgo -o github.com/emirpasic/gods/maps.o -c github.com/emirpasic/gods/maps/maps
 gccgo -o github.com/emirpasic/gods/trees.o -c github.com/emirpasic/gods/trees/trees.go
 gccgo -o github.com/emirpasic/gods/trees/redblacktree.o -c github.com/emirpasic/gods/trees/redblacktree/redblacktree.go github.com/emirpasic/gods/trees/redblacktree/iterator.go github.com/emirpasic/gods/trees/redblacktree/serialization.go
 gccgo -o github.com/emirpasic/gods/maps/treemap.o -c github.com/emirpasic/gods/maps/treemap/treemap.go github.com/emirpasic/gods/maps/treemap/enumerable.go github.com/emirpasic/gods/maps/treemap/iterator.go github.com/emirpasic/gods/maps/treemap/serialization.go
-gccgo -o ./lis/target.o -c ./lis/target/target.go
-gccgo -o ./lis/lis_map.o -c ./lis/lis_map/lis.go ./lis/lis_map/litest.go
-gccgo -o ./lis/lis_tree.o -c ./lis/lis_tree/lis.go ./lis/lis_tree/litest.go
-gccgo -o main -c ./main/mini-li.go
+gccgo -o mini-li/lis/target.o -c mini-li/lis/target/target.go
+gccgo -o mini-li/lis/lis_map.o -c mini-li/lis/lis_map/lis.go mini-li/lis/lis_map/litest.go
+gccgo -o mini-li/lis/lis_tree.o -c mini-li/lis/lis_tree/lis.go mini-li/lis/lis_tree/litest.go
+gccgo -o main -c mini-li/main/mini-li.go
