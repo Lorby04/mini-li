@@ -1,5 +1,0 @@
-[erthost] loading enclave ...
-ERROR: enclave_initialize failed (err=0x1001) (oe_result_t=OE_PLATFORM_ERROR) [openenclave-src/host/sgx/sgxload.c:oe_sgx_initialize_enclave:745]
-ERROR: oe_create_enclave failed. (Set OE_SIMULATION=1 for simulation mode.) [src/tools/erthost/erthost.cpp:main:265]
-ERROR: failed to initialize the enclave
-Try to run: sudo ego install libsgx-launch

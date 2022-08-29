@@ -1,3 +1,0 @@
-Testing started with parameters:entries: 100000 query loops: 120 input query routines: 2 service routines: 2 storage: testtree
-Writing entries: 100000 , time:  103.739285ms
-Searching time: 2m31.336918788s Statistics:  Query:96000000, Got:100111, in 100000 entries
